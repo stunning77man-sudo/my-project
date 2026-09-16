@@ -1,48 +1,16 @@
-# my-project
-
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Recommended Browser Setup
-
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+📄 页面功能说明
+1️⃣ 登录页（模拟权限控制）
+- 表单字段：用户名 / 密码（任意值）
+- 登录逻辑：用户名为 "admin" → 管理员权限；其他用户名 → 普通用户权限
+- 登录后跳转主页面（无需 token 存储或刷新逻辑）
+2️⃣ 工单列表展示
+- 字段：ID、Project、Overtime、Hours、Created At
+- 使用表格组件展示 4~5 条 mock 数据
+- 每行提供“Delete”按钮（仅管理员可见）
+- 删除后图表应同步更新
+3️⃣ 图表展示（柱状图）
+- 标题：Project Hours Distribution
+- 展示不同项目的累计工时（根据当前表格数据）
+4️⃣ 权限控制逻辑
+- 管理员：可查看、删除工单并查看图表
+- 普通用户：只能查看工单与图表，不能删除
