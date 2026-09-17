@@ -33,6 +33,7 @@ const columns = computed(() => [
   { title: 'ProjectName', dataIndex: 'project', key: 'project' },
   { title: 'Overtime', dataIndex: 'overtime', key: 'overtime' },
   { title: 'Hours', dataIndex: 'hours', key: 'hours' },
+  { title: 'CreatedAt', dataIndex: 'created_at', key: 'created_at' },
   ...(isAdmin.value ? [{ title: 'Options', key: 'options' }] : []),
 ])
 
@@ -68,16 +69,18 @@ onUnmounted(() => {
 <template>
   <main class="home-page">
     <div class="content-row">
-      <a-table class="project-table" :columns="columns" :data-source="projectStore.data" row-key="id">
-        <template #bodyCell="{ column, record }">
-          <template v-if="column.key === 'overtime'">
-            {{ record.overtime ? 'Yes' : 'No' }}
+      <div class="table-wrapper">
+        <a-table class="project-table" :columns="columns" :data-source="projectStore.data" row-key="id">
+          <template #bodyCell="{ column, record }">
+            <template v-if="column.key === 'overtime'">
+              {{ record.overtime ? 'Yes' : 'No' }}
+            </template>
+            <template v-else-if="column.key === 'options' && isAdmin">
+              <a-button danger @click="removePerson(record.id)">删除</a-button>
+            </template>
           </template>
-          <template v-else-if="column.key === 'options' && isAdmin">
-            <a-button danger @click="removePerson(record.id)">删除</a-button>
-          </template>
-        </template>
-      </a-table>
+        </a-table>
+      </div>
       <div ref="chartRef" class="bar-chart"></div>
     </div>
   </main>
@@ -94,9 +97,53 @@ onUnmounted(() => {
   align-items: flex-start;
 }
 
-.project-table,
+.table-wrapper,
 .bar-chart {
   width: 50%;
+  min-width: 0;
+}
+
+.table-wrapper {
+  overflow: hidden;
+}
+
+.bar-chart {
   height: 360px;
+}
+
+:deep(.project-table .ant-table) {
+  table-layout: fixed;
+  width: 100%;
+}
+
+:deep(.project-table .ant-table-cell) {
+  padding: 12px 6px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    padding: 12px;
+  }
+
+  .content-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .table-wrapper,
+  .bar-chart {
+    width: 100%;
+  }
+
+  .bar-chart {
+    height: 300px;
+  }
+
+  :deep(.project-table .ant-table-cell) {
+    padding: 8px 3px;
+    font-size: 12px;
+  }
 }
 </style>

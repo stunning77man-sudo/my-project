@@ -32,5 +32,6 @@ const onFinish = () => {
 .login-form {
   max-width: 420px;
   margin: 80px auto;
+  padding: 0 16px;
 }
 </style>
