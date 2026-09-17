@@ -14,7 +14,7 @@ const projectHours = computed(() => projectStore.data.reduce<Record<string, numb
 }, {}))
 
 const barOption = computed<EChartsOption>(() => ({
-  title: { text: 'Project total hours' },
+  title: { text: 'Project Hours Distribution' },
   grid: { left: 50, right: 30, bottom: 90, containLabel: true },
   tooltip: {},
   xAxis: {
